@@ -28,7 +28,7 @@ class App extends Component {
     });
   };
 
-  onRemove = (e, index) => {
+  deleteItem = (index) => {
     const newTodos = this.state.todos.slice();
     newTodos.splice(index, 1);
     this.setState({
@@ -36,7 +36,7 @@ class App extends Component {
     });
   };
 
-  render() {    
+  render() {
     return (
       <div className="App">
         <header className="App-header">
@@ -50,15 +50,32 @@ class App extends Component {
           {
             this.state.todos.map((val, index) => {
               return (
-                <li key={index}>
-                  {val}
-                  <button onClick={e => this.onRemove(e, index)} index={index}>Remove</button>
-                </li>
+                <TodoItem
+                  index={index}
+                  val={val}
+                  status={"green"}
+                  handleClick={e => this.deleteItem(index)}
+                  handleChange={e => console.log("handleChange")}
+                  handleEdit={e => console.log("handleEdit")} />
               );
             })
           }
         </ul>
       </div>
+    );
+  }
+}
+
+class TodoItem extends React.Component {
+  render() {
+    return (
+      <li
+        key={this.props.index}
+        style={{ color: this.props.status }}
+      >
+        {this.props.val}
+        <button onClick={this.props.handleClick}>Remove</button>
+      </li>
     );
   }
 }
