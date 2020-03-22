@@ -46,6 +46,10 @@ class App extends Component {
           </form>
           <button onClick={this.onClick}>Submit</button>
         </header>
+        
+          this.state.todos.length > 0 ? <h3>You have {this.state.todos.length} item(s) to do.</h3> 
+          : null
+        }
         <ul>
           {
             this.state.todos.map((val, index) => {
